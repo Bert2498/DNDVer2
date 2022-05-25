@@ -1,0 +1,7 @@
+D:\DNDver2\DNDVer2\DNDVer2\bin\Debug\DNDVer2.exe.config
+D:\DNDver2\DNDVer2\DNDVer2\bin\Debug\DNDVer2.exe
+D:\DNDver2\DNDVer2\DNDVer2\bin\Debug\DNDVer2.pdb
+D:\DNDver2\DNDVer2\DNDVer2\obj\Debug\DNDVer2.csproj.AssemblyReference.cache
+D:\DNDver2\DNDVer2\DNDVer2\obj\Debug\DNDVer2.csproj.CoreCompileInputs.cache
+D:\DNDver2\DNDVer2\DNDVer2\obj\Debug\DNDVer2.exe
+D:\DNDver2\DNDVer2\DNDVer2\obj\Debug\DNDVer2.pdb
