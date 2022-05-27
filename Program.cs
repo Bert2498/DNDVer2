@@ -11,15 +11,12 @@ namespace DNDVer2
     {
         static void Main(string[] args)
         {
-            WriteLine("Please chose a weapon: " +
-                "\naxe: " +
-                "\nsword: " +
-                "\nkatana: " +
-                "\nshield: " +
-                "\ndagger: ");
-            string weapon = ReadLine();
-            Action.Combat(weapon);
-            WriteLine("Nicely done, unless you ran away of course.. ");
+            //asking the user to enter the weapon of choice and saving it as pWeapon
+            string pWeapon = Action.getWeapon();
+
+            //using the combat method to simulate a fight
+            Action.Combat(pWeapon);
+
             Console.Read();
         }
     }
@@ -27,99 +24,110 @@ namespace DNDVer2
     //creating the combat class
     public class Action : Dice
     {
-        //creating the attacks
-        public int attack { get; set; }
 
-        //adding the play hp as well
-        public int php;
-
-        //the total enemy hp
-        public int enemyHP;
-
-        //creating the weapons 
-        public string axe = "axe";
-        public string sword = "sword";
-        public string katana = "katana";
-        public string shield = "shield";
-        public string dagger = "dagger";
-
-        public void Damage(string weapon)
+        //creating the starting weapon method
+        public static string getWeapon()
         {
-            //setting the damages equal to the weapons ability
-            if (weapon == axe)
-            {
-                attack = 25;
-            }
+            string[] weapons = { "axe", "sword", "katana", "claymore", "dagger" };
 
-            else if (weapon == sword)
-            {
-                attack = 50;
-            }
+            //prompting the user to ener a weapon choice
+            WriteLine("Please chose a weapon: " +
+                "\naxe: " +
+                "\nsword: " +
+                "\nkatana: " +
+                "\nclaymore: " +
+                "\ndagger: ");
+            //adding a space in between for aesthetic
+            WriteLine();
+            
+            //asking the user to enter the weapon type
+            string weapon = ReadLine();
 
-            else if (weapon == katana)
+            //seeing if the input is a correct weapon type
+            while (!weapons.Contains(weapon))
             {
-                attack = 60;
+                WriteLine("No, " + weapon + " is not a weapon, try again >:( ");
+                weapon = ReadLine();
             }
-
-            else if (weapon == shield)
-            {
-                attack = 10;
-            }
-
-            else if (weapon == dagger)
-            {
-                attack = 20;
-            }
+            //this is just to test
+            //WriteLine(weapon);
+            
+            return weapon;
         }
 
-        //creating the enemies class
-        //reusing the enemy class to merge together with the combat class
-        public int hp;
-        public string Orc = "Orc";
-        public string Giant = "Giant";
-        public string Slime = "Slime";
-        public string Dragon = "Dragon";
-        public string Satan = "The Big Cheese";
-
-        //creating the enemy constructor
-        public int Enemy()
+        //creating a new method for the weapon damage
+        public static int getWeaponDamage(string weapon)
         {
-            string enemy = " ";
+            int weaponDamage = 0;
 
-            if (enemy == Orc)
+            if (weapon.Equals("axe"))
             {
-                hp = 200;
+                weaponDamage = 75;
+            }
+            else if (weapon.Equals("sword"))
+            {
+                weaponDamage = 100;
+            }
+            else if (weapon.Equals("katana"))
+            {
+                weaponDamage = 200;
+            }
+            else if (weapon.Equals("claymore"))
+            {
+                weaponDamage = 250;
+            }
+            else if (weapon.Equals("dagger"))
+            {
+                weaponDamage = 50;
+            }
+            //for testing weapon damage
+            //WriteLine("The weapon damage is " + weaponDamage);
+
+            //returning the damage number 
+            return weaponDamage;
+        }
+        //creating the method for setting the enemy health
+        public static int getEnemyHP(string enemy)
+        {
+            //initializing health
+            int enemyHealth = 0;
+
+            if (enemy.Equals("orc"))
+            {
+                enemyHealth = 200;
             }
 
-            else if (enemy == Giant)
+            else if (enemy.Equals("giant"))
             {
-                hp = 400;
+                enemyHealth = 400;
             }
 
-            else if (enemy == Slime)
+            else if (enemy.Equals("slime"))
             {
-                hp = 50;
+                enemyHealth = 50;
             }
 
-            else if (enemy == Dragon)
+            else if (enemy.Equals("dragon"))
             {
-                hp = 800;
+                enemyHealth = 800;
             }
 
-            else if (enemy == Satan)
+            else if (enemy.Equals("Satan"))
             {
-                hp = 15000;
+                enemyHealth = 1500;
             }
-            return hp;
+            return enemyHealth;
 
         }
 
         //creating the actual combat constructor that will take the enemies hp, weapon stat and turn base option
         public static void Combat(string weapon)
         {
-            //string enemy;
+            //asking the user if they want to run or fight
+            WriteLine("An enemy appears before you, how do you respond?: " +
+                "\nrun or fight? ");
 
-            WriteLine("An enemy appears before you, how do you respond?: \nrun or fight? ");
+            //reading the users input
             string action = ReadLine();
 
             while (!action.Equals("run") && !action.Equals("fight"))
@@ -132,6 +140,9 @@ namespace DNDVer2
             //if the user entered run, return
             if (action.Equals("run"))
             {
+                //call the user a coward and send them back to the first prompt
+                WriteLine("What a coward, but you live to see another day I guess.. ");
+                
                 return;
             }
 
@@ -145,12 +156,13 @@ namespace DNDVer2
                 int enemyRoll = roll.D10();
 
                 //showing what number the player rolled
-                WriteLine(enemyRoll);
+                WriteLine("You rolled a " + enemyRoll);
 
                 //deciding which enemies will apear
                 if (enemyRoll <= 4)
                 {
                     WriteLine("A slime stands in front of you: ");
+                    TurnCombat(weapon, "slime");
 
                 }
 
@@ -158,20 +170,52 @@ namespace DNDVer2
                 else if (enemyRoll >= 5 && enemyRoll <= 7)
                 {
                     WriteLine("An Orc stands in front of you: ");
+                    TurnCombat(weapon, "orc");
                 }
 
                 //else if it is higher than 7
                 else if (enemyRoll >= 8 && enemyRoll <= 9)
                 {
                     WriteLine("A Giant stands in front of you: ");
+                    TurnCombat(weapon, "giant");
                 }
 
                 //if it is a 10
                 else if (enemyRoll > 9)
                 {
                     WriteLine("Unlucky, a Dragon stands in front of you: ");
+                    TurnCombat(weapon, "dragon");
                 }
             }
+        }
+
+        //creating the turn based combat method
+        public static void TurnCombat(string weapon, string enemy)
+        {
+            //creating the int for the total health
+            
+            //testing to see if the weapon and enemy health are correct
+            int weaponDamage = getWeaponDamage(weapon);
+
+            //WriteLine("The weapon damage is " + weaponDamage);
+            int enemyHealth = getEnemyHP(enemy);
+
+            //WriteLine("Enemy HP is " + enemyHealth);
+
+            //while the monster still has health, stay in combat mode
+            while (enemyHealth > 0)
+            {
+                WriteLine("The enemy has " + enemyHealth + " health");
+                WriteLine("Press enter to attack: ");
+                ReadLine();
+                enemyHealth = enemyHealth - weaponDamage;
+            }
+
+            //once the player defeats the enemy
+            WriteLine("Congrats!! I mean, that " + enemy + " was pretty weak, but good job either way..");
+            
+
+
         }
         
     }
