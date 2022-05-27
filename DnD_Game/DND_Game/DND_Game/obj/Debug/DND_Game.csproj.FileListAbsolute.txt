@@ -1,0 +1,7 @@
+D:\DnD_Game\DND_Game\DND_Game\bin\Debug\DND_Game.exe.config
+D:\DnD_Game\DND_Game\DND_Game\bin\Debug\DND_Game.exe
+D:\DnD_Game\DND_Game\DND_Game\bin\Debug\DND_Game.pdb
+D:\DnD_Game\DND_Game\DND_Game\obj\Debug\DND_Game.csproj.AssemblyReference.cache
+D:\DnD_Game\DND_Game\DND_Game\obj\Debug\DND_Game.csproj.CoreCompileInputs.cache
+D:\DnD_Game\DND_Game\DND_Game\obj\Debug\DND_Game.exe
+D:\DnD_Game\DND_Game\DND_Game\obj\Debug\DND_Game.pdb
